@@ -1,14 +1,8 @@
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon, LogIn } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignOutButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 
 const Navbar = async () => {
@@ -19,7 +13,7 @@ const Navbar = async () => {
         <div className="flex gap-4">
           <Link href="/" className="flex items-center gap-2">
             <ExternalLinkIcon className="h-6 w-6" />
-            <span className="font-bold">sharejson.</span>
+            <span className="font-bold">WorthyQuotes.</span>
           </Link>
           <nav>
             <Link
@@ -37,7 +31,7 @@ const Navbar = async () => {
         ) : (
           <SignedOut>
             <SignInButton mode="modal">
-              <Button>Sign In</Button>
+              <LogIn className="hover:cursor-pointer" />
             </SignInButton>
           </SignedOut>
         )}
