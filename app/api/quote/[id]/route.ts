@@ -1,14 +1,17 @@
 import prisma from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { id } = params;
-  console.log(typeof id);
-
   try {
+    // Ensure params are resolved before accessing
+    const { id } = params; // destructure directly from params
+
     const json = await prisma.quoteData.findUnique({
       where: {
         id,
@@ -21,12 +24,13 @@ export async function GET(
       },
     });
 
+    // Return the fetched quote data as JSON
     return NextResponse.json(json);
   } catch (error) {
-    console.error("Error fetching quotes", error);
+    console.error("Error fetching quote", error);
     return NextResponse.json(
       {
-        error: "Error fetching quotes",
+        error: "Error fetching quote",
       },
       { status: 500 }
     );
