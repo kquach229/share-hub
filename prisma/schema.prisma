@@ -1,12 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-    output   = "./generated/client"
+  output   = "./generated/client"
 }
 
 datasource db {
@@ -15,22 +9,22 @@ datasource db {
 }
 
 model User {
-  id String @id @default(cuid())
-  clerkUserId String @unique
-  email String @unique
-  name String?
-  imageUrl String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  quotes QuoteData[]
+  id          String      @id @default(cuid())
+  clerkUserId String      @unique
+  email       String      @unique
+  name        String?
+  imageUrl    String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  quotes      QuoteData[]
 }
 
 model QuoteData {
-  id String @id @default(cuid())
-  name String
-  content String
-  userId String
-  user User @relation(fields: [userId], references: [clerkUserId])
+  id        String   @id @default(cuid())
+  name      String
+  content   String
+  userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [clerkUserId])
 }
