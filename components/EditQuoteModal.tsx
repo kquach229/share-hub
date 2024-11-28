@@ -30,7 +30,7 @@ const EditQuoteModal = ({ quote, onClose, onSave }: EditQuoteModalProps) => {
 
       if (response.ok) {
         onSave(); // Refresh the data after successful update
-        onClose(); // Close the modal
+        onClose();
       } else {
         console.error("Failed to update the quote.");
       }
