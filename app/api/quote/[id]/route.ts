@@ -1,11 +1,14 @@
 import prisma from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   const { id } = params;
+  console.log(typeof id);
 
   try {
-    // Fetching the quote from the database
     const json = await prisma.quoteData.findUnique({
       where: {
         id,
@@ -18,31 +21,28 @@ export async function GET({ params }: { params: { id: string } }) {
       },
     });
 
-    // If no quote is found, handle the error
-    if (!json) {
-      return NextResponse.json({ error: "Quote not found" }, { status: 404 });
-    }
-
-    // Return the JSON response with the found quote
     return NextResponse.json(json);
   } catch (error) {
-    console.error("Error fetching quote", error);
+    console.error("Error fetching quotes", error);
     return NextResponse.json(
       {
-        error: "Error fetching quote",
+        error: "Error fetching quotes",
       },
       { status: 500 }
     );
   }
 }
 
-export async function DELETE({
-  params,
-}: {
-  params: {
-    id: string;
-  };
-}) {
+export async function DELETE(
+  request: NextRequest,
+  {
+    params,
+  }: {
+    params: {
+      id: string;
+    };
+  }
+) {
   const { id } = params;
 
   try {

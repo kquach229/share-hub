@@ -31,7 +31,6 @@ const JsonDataTable = () => {
     }
   };
 
-  //ksdlfjl
   useEffect(() => {
     fetchData();
   }, []);
