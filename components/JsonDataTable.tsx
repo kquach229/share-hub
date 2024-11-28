@@ -12,7 +12,7 @@ import { QuoteData } from "@prisma/client";
 import { format } from "date-fns";
 import Link from "next/link";
 import { DeleteIcon, ShareIcon, EditIcon } from "lucide-react";
-import EditQuoteModal from "./editQuoteModal"; // Import the EditQuoteModal
+import EditQuoteModal from "./EditQuoteModal"; // Import the EditQuoteModal
 
 const JsonDataTable = () => {
   const [quotes, setQuotes] = useState<QuoteData[]>([]);
