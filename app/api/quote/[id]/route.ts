@@ -8,6 +8,7 @@ export async function GET(
   const { id } = params;
 
   try {
+    // Fetching the quote from the database
     const json = await prisma.quoteData.findUnique({
       where: {
         id,
@@ -20,12 +21,18 @@ export async function GET(
       },
     });
 
+    // If no quote is found, handle the error
+    if (!json) {
+      return NextResponse.json({ error: "Quote not found" }, { status: 404 });
+    }
+
+    // Return the JSON response with the found quote
     return NextResponse.json(json);
   } catch (error) {
-    console.error("Error fetching quotes", error);
+    console.error("Error fetching quote", error);
     return NextResponse.json(
       {
-        error: "Error fetching quotes",
+        error: "Error fetching quote",
       },
       { status: 500 }
     );
